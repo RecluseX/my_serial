@@ -154,5 +154,6 @@ void *MYSERIAL::ApplicationSerialRun(void *arg)
 
 S32 MYSERIAL::OnSerialComRead()
 {
-
+  U16 nread;
+  U8 *rx = RxBuf;
 }
