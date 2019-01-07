@@ -11,6 +11,8 @@ find_package(catkin REQUIRED COMPONENTS
  roscpp
  std_msgs
  serial
+ geometry_msgs
+ motor_msg
 )
 
 ## System dependencies are found with CMake's conventions
@@ -49,8 +51,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 # add_message_files(
 #   FILES
-#   Message1.msg
-#   Message2.msg
+#   motor.msg
 # )
 
 ## Generate services in the 'srv' folder
@@ -70,6 +71,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 #generate_messages(
 #   DEPENDENCIES
+#   geometry_msgs
 #   std_msgs  # Or other packages containing msgs
 #)
 
@@ -105,8 +107,8 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES my_serial
-#  CATKIN_DEPENDS other_catkin_pkg
-#  DEPENDS system_lib
+#  CATKIN_DEPENDS message_runtime
+  DEPENDS system_lib
 )
 
 ###########
@@ -198,6 +200,6 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-add_executable(serial_port  src/my_serial.cpp)
-#add_dependencies(serial_port beginner_tutorials_generate_messages_cpp)
-target_link_libraries(serial_port ${catkin_LIBRARIES})
+add_executable(my_serial  src/my_serial.cpp)
+add_dependencies(my_serial motor_msg_generate_messages_cpp)
+target_link_libraries(my_serial ${catkin_LIBRARIES})
